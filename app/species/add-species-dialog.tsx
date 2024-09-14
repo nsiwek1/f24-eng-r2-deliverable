@@ -54,6 +54,7 @@ const speciesSchema = z.object({
     .nullable()
     // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
     .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
+  endangered: z.boolean().nullable(),
 });
 
 type FormData = z.infer<typeof speciesSchema>;
@@ -71,6 +72,7 @@ const defaultValues: Partial<FormData> = {
   kingdom: "Animalia",
   total_population: null,
   image: null,
+  endangered: null,
   description: null,
 };
 
@@ -99,6 +101,7 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
         scientific_name: input.scientific_name,
         total_population: input.total_population,
         image: input.image,
+        endangered: input.endangered,
       },
     ]);
 
@@ -267,6 +270,32 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
                     </FormItem>
                   );
                 }}
+              />
+              <FormField
+                control={form.control}
+                name="endangered"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Endangered</FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={(value) => field.onChange(value === "true")}
+                        value={field.value === null ? "" : field.value.toString()}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select endangered status" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="true">Yes</SelectItem>
+                          <SelectItem value="false">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
               <div className="flex">
                 <Button type="submit" className="ml-1 mr-1 flex-auto">
