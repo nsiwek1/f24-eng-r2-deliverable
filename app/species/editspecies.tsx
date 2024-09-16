@@ -110,7 +110,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
       description: "Successfully updated " + input.scientific_name + ".",
     });
   };
-
+  /* creates thedialog window to the edit */
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

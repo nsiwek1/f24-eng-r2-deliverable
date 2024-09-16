@@ -45,7 +45,7 @@ export default function DeleteSpecies({ species }: DeleteSpeciesProps) {
       description: `Successfully deleted ${species.scientific_name}.`,
     });
   };
-
+  /* confirmatio window */
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
