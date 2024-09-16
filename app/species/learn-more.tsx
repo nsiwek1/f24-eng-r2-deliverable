@@ -18,7 +18,7 @@ export default function SpeciesDetailDialog({ species }: SpeciesDetailDialogProp
 
   useEffect(() => {
     const fetchAuthor = async () => {
-      const supabase = createBrowserSupabaseClient<Database>();
+      const supabase = createBrowserSupabaseClient(); // Removed unnecessary type argument
       const { data, error } = await supabase.from("profiles").select("*").eq("id", species.author).single();
 
       if (error) {
@@ -30,7 +30,7 @@ export default function SpeciesDetailDialog({ species }: SpeciesDetailDialogProp
 
     fetchAuthor();
   }, [species.author]);
-  /* dialog window that shows more detaails and the author's name */
+
   return (
     <Dialog>
       <DialogTrigger asChild>
