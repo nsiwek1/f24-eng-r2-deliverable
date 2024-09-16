@@ -20,6 +20,7 @@ export default async function SpeciesList() {
   // Obtain the ID of the currently signed-in user
   const sessionId = session.user.id;
 
+  // Fetch species data
   const { data: species } = await supabase.from("species").select("*").order("id", { ascending: false });
 
   return (
@@ -30,7 +31,7 @@ export default async function SpeciesList() {
       </div>
       <Separator className="my-4" />
       <div className="flex flex-wrap justify-center">
-        {species?.map((species) => <SpeciesCard key={species.id} species={species} />)}
+        {species?.map((species) => <SpeciesCard key={species.id} species={species} userId={sessionId} />)}
       </div>
     </>
   );
