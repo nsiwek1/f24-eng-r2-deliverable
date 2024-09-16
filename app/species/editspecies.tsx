@@ -16,14 +16,14 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { createBrowserSupabaseClient } from "@/lib/client-utils";
-import type { Database } from "@/lib/schema";
+import type { Database } from "@/lib/schema"; // Ensure this is imported correctly
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-type Species = Database["public"]["Tables"]["species"]["Row"];
+type Species = Database["public"]["Tables"]["species"]["Row"]; // Ensure that the Database type is correct
 
 interface EditSpeciesProps {
   species: Species;
@@ -79,7 +79,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
   });
 
   const onSubmit = async (input: FormData) => {
-    const supabase = createBrowserSupabaseClient<Database>();
+    const supabase = createBrowserSupabaseClient(); // Removed unnecessary type argument
     const { error } = await supabase
       .from("species")
       .update({
@@ -110,7 +110,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
       description: "Successfully updated " + input.scientific_name + ".",
     });
   };
-  /* creates thedialog window to the edit */
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -120,7 +120,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
         <DialogHeader>
           <DialogTitle>Edit Species</DialogTitle>
           <DialogDescription>
-            Edit the species here. Click &quot Update Species below when you are &quot done.
+            Edit the species here. Click &quot;Update Species&quot; below when you are done.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -182,7 +182,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
               name="total_population"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Total population</FormLabel>
+                  <FormLabel>Total Population</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
