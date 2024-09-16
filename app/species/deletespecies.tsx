@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { createBrowserSupabaseClient } from "@/lib/client-utils";
-import type { Database } from "@/lib/schema";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -27,7 +26,7 @@ export default function DeleteSpecies({ species }: DeleteSpeciesProps) {
   const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {
-    const supabase = createBrowserSupabaseClient<Database>();
+    const supabase = createBrowserSupabaseClient(); // No type argument needed
     const { error } = await supabase.from("species").delete().eq("id", species.id);
 
     if (error) {
@@ -45,7 +44,7 @@ export default function DeleteSpecies({ species }: DeleteSpeciesProps) {
       description: `Successfully deleted ${species.scientific_name}.`,
     });
   };
-  /* confirmatio window */
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
