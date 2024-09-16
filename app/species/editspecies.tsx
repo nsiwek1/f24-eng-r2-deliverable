@@ -145,7 +145,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
                 <FormItem>
                   <FormLabel>Common Name</FormLabel>
                   <FormControl>
-                    <Input {...field} value={field.value || ""} />
+                    <Input {...field} value={field.value ?? ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,7 +188,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
                       type="number"
                       {...field}
                       onChange={(event) => field.onChange(+event.target.value)}
-                      value={field.value || ""}
+                      value={field.value ?? ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -202,7 +202,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
                 <FormItem>
                   <FormLabel>Image URL</FormLabel>
                   <FormControl>
-                    <Input {...field} value={field.value || ""} />
+                    <Input {...field} value={field.value ?? ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -215,7 +215,7 @@ export default function EditSpecies({ species, userId }: EditSpeciesProps) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea {...field} value={field.value || ""} />
+                    <Textarea {...field} value={field.value ?? ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

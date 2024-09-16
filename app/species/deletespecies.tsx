@@ -62,7 +62,14 @@ export default function DeleteSpecies({ species }: DeleteSpeciesProps) {
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button variant="destructive" onClick={handleDelete}>
+          <Button
+            variant="destructive"
+            onClick={() => {
+              handleDelete().catch((error) => {
+                console.error("Error deleting species:", error);
+              });
+            }}
+          >
             Confirm Delete
           </Button>
         </div>
